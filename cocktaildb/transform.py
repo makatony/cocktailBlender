@@ -4,7 +4,7 @@ import os
 drinks = {}
 
 for filename in os.listdir('.'):
-    if filename.endswith('.json'):
+    if filename.endswith('.json') and filename[:-5].isnumeric():
         with open(filename) as json_file:
             drink_js = json.load(json_file)
             drink_name = drink_js['strDrink']
@@ -16,7 +16,7 @@ for filename in os.listdir('.'):
             drink_text += '\n'
             for i in range(1, 16):
                 if drink_js['strIngredient{}'.format(i)]:
-                    drink_text += drink_js['strMeasure{}'.format(i)] + ' ' + drink_js['strIngredient{}'.format(i)] + '\n'
+                    drink_text += (drink_js['strMeasure{}'.format(i)] + ' ' + drink_js['strIngredient{}'.format(i)]).strip() + '\n'
             drink_text += '\n'
             drink_text += drink_js['strInstructions']
 
